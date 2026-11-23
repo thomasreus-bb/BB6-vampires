@@ -83,6 +83,43 @@ More machines can be added here as they are found.
 
 <img src="diagrams/1RB1RF_1LC1RD_1LA1LC_1RA0RE_1RD1LA_---0LE.png" alt="space-time diagram" height="350">
 
+**Equivalence.** No. 70 is exactly no. 86 started in state B: the two machines differ in two transitions, which are only used together in a 3-step detour that ends in the same configuration in both. No. 86 started in A (the real holdout) runs in lockstep with no. 70 after about 3.5·10⁵ steps; only a short frozen part at the right end of the tape differs.
+
+**Bells.** A Bell starts when state A reaches a new leftmost cell with the tape
+
+    1 0^x 1^m 0^g1 1^b1 0^g2 1^b2 ...      (blocks of ones b_i, gaps of zeros g_i)
+
+During a Bell the left block grows by 6 and the gap x shrinks by 4 per sweep, so the next Bell has
+
+    x' = 3x/2 + c
+
+with a small constant c. The list S = [m, g1, b1, g2, b2, ...] is a **stack**: each Bell rewrites only its first few entries (at most 4 pairs), and how it does so depends only on S's front and on x mod 12. In the run x is always divisible by 6, so **one bit per Bell** (x/6 even or odd) drives the stack, as in the vampires (Hydra-like parities). The rules are not a short closed table (more than 60,000 different ones by 2·10⁹ Bells); the simulator learns each rule by direct simulation when it is first needed.
+
+**Way to HALT.** HALT needs a block of length 1 in the stack that is then hit (about 6 % chance). Blocks of length 1 only arise when an odd block shrinks step by step: 9 → 7 → 5 → 3 → 1. Blocks 9 are frequent, every further step is rare. The smallest block seen so far plays the role of the distance D of the vampires.
+
+**Data** (simulation with `sim70dc`, exact, 2,334,311,323 Bells, about 10^(8.2·10⁸) TM steps, no HALT):
+
+| quantity | value |
+|---|---|
+| blocks 9 near the front | 462,215 (2.0·10⁻⁴ per Bell) |
+| blocks 7 | 10,370 (4.4·10⁻⁶ per Bell) |
+| blocks 5 | 26 (1.1·10⁻⁸ per Bell), first at Bell 48,097,200 |
+| blocks 3 / 1 | 0 / 0 |
+| P(5 → 3), P(3 → 1) | 0.8 %, 0.6 % (injection tests: block put into the real stack, 300 Bells with random parities) |
+| P(HALT \| block 1) | 6 % |
+| first block 3 expected after | about 10¹⁰ Bells |
+
+**Expected HALT (Markov-type estimate).** Rate = (blocks 5 per Bell) · P(5 → 3) · P(3 → 1) · P(HALT | 1) ≈ 1.1·10⁻⁸ · 0.008 · 0.006 · 0.06 ≈ **3·10⁻¹⁴ per Bell** (90 % interval 2.7–4.5·10⁻¹⁴ from the long-run estimator). The rate stays constant over the run, so in this model the machine halts with probability 1:
+
+| | Bells | TM steps |
+|---|---|---|
+| 50 % (median) | ≈ 2·10¹³ | ≈ 10^(7·10¹²) |
+| 99 % | ≈ 1.3·10¹⁴ | ≈ 10^(5·10¹³) |
+
+This is a heuristic, not a proof; the probabilities of the last steps rest on few events and are good to about a factor 3.
+
+**Computing time to HALT.** `sim70dc` runs at 1.5–3.5 million Bells/s on one core, but the stack grows by 2.2 bytes per Bell: at 2·10¹³ Bells it would need about 44 TB of disk (x itself only 1.5 TB). Out of reach with the current program; a first block 3 (about 10¹⁰ Bells, 22 GB) is within reach of a notebook.
+
 <a id="86"></a>
 ### [86](#t86). `1RB0RE_1RC0RF_1LD1RA_1LB1LD_1RA1LB_---0LD`
 
