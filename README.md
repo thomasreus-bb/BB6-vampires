@@ -95,7 +95,7 @@ During a Bell the left block grows by 6 and the gap x shrinks by 4 per sweep, so
 
 with a small constant c. The list S = [m, g1, b1, g2, b2, ...] is a **stack**: each Bell rewrites only its first few entries (at most 4 pairs), and how it does so depends only on S's front and on x mod 12. In the run x is always divisible by 6, so **one bit per Bell** (x/6 even or odd) drives the stack, as in the vampires (Hydra-like parities). The rules are not a short closed table (more than 60,000 different ones by 2·10⁹ Bells); the simulator learns each rule by direct simulation when it is first needed.
 
-**Way to HALT.** HALT needs a block of length 1 in the stack that is then hit (about 6 % chance). Blocks of length 1 only arise when an odd block shrinks step by step: 9 → 7 → 5 → 3 → 1. Blocks 9 are frequent, every further step is rare. The smallest block seen so far plays the role of the distance D of the vampires.
+**Way to HALT.** HALT needs a block of length 1 in the stack that is then hit (about 6 % chance). Blocks of length 1 only arise when an odd block shrinks step by step: 9 → 7 → 5 → 3 → 1. Blocks 9 are frequent, every further step is rare. During the simulation, the smallest block seen so far indicates how close the run has come to HALT (simulation progress), similar to the role of the distance D for the vampires (nos. 1–8).
 
 **Data** (simulation with [`sim70dc`](m70/README.md), exact, 2,334,311,323 Bells, about 10^(8.2·10⁸) TM steps, no HALT):
 
