@@ -3,6 +3,7 @@
 | file | content |
 |---|---|
 | `sim70dc.c` | **main simulator**: exact Bell map, rules learned on the fly by direct simulation of the TM; x advanced by divide and conquer with GMP; the deep part of the stack in the file `sim70dc.stack`; checkpoint `sim70dc.ck`; every block 7, 5, 3, 1 near the front of the stack is logged in `events70dc.txt` |
+| `sim70dz.c` | as `sim70dc.c`, but the deep stack is stored compressed (about 11 times smaller) and the report counts reads of it (`disk reads`); with `-d` no deep stack is kept at all: so far it is never read back (to 3·10⁸ Bells even with only 4,096 entries in RAM); should it ever be needed, the program stops with a message. Same speed. Compile with `gcc -O3 -march=native -o sim70dz sim70dz.c -lgmp -lz` (`sudo apt install zlib1g-dev`) |
 | `sim70.c` | the same without GMP and without disk (simpler, much slower for large x) |
 | `macro70.py`, `lev70.c` | the rule learner in Python (used by `watch70.py`; `lev70` is compiled automatically) |
 | `watch70.py` | long-run estimator: real run plus injection tests (a block 1, 3, 5, 7 or 9 put into the real stack, 300 Bells with random parities), gives the halting rate per Bell with an interval and a stationarity test |
