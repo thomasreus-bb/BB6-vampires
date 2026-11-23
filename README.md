@@ -8,7 +8,7 @@ Machines whose Bell map is driven by the digits of one large number n (n' ≈ q�
 
 **Status:** *simulated to HALT* = the HALT was found by exact simulation of the Bell map; *+ proof* = in addition a formal Rocq proof; *open* = no HALT found yet.
 
-| no.¹ | machine | type | status | expected HALT (Markov) | computing time to HALT | steps of the original TM |
+| no. | machine | type | status | expected HALT (Markov) | computing time to HALT | steps of the original TM |
 |---|---|---|---|---|---|---|
 <a id="t8"></a>[8](#8) | `1RB0RB_1LC1RF`<br>`0RD0LB_0RA1LE`<br>`1LD---_0RB0RC` | vampire, 4/3, closed table (192 words) | **simulated to HALT + proof** (Bell 298,793,335, 21 Oct; Rocq proof busycoq PR #41, accepted) | 1.6·10⁻⁹ per Bell → ≈ 6·10⁸ Bells | ≈ 2 min on one core (`belldc3`) | ≈ 10^(7.5·10⁷) |
 <a id="t1"></a>[1](#1) | `1RB0RF_1LC---`<br>`1RD0LC_0RE0RD`<br>`1LF1LC_1LE1RA`<br>(TM1-F, orbit O2) | vampire family, 3/2, closed table (2,880 words) | **simulated to HALT** (Bell 731,899,010,932, Ahmer Raza, 30 Oct; confirmed by Thomas Reus) | 8.9·10⁻¹³ per Bell → ≈ 1.1·10¹² Bells (median 7.8·10¹¹) | 23 h 42 min on 8 cores (AMD EPYC 9655, `belldco`); ≈ 13–14 days on a notebook | ≈ 10^(2.58·10¹¹) |
@@ -35,7 +35,6 @@ Not included:
 More machines can be added here as they are found.
 
 
-¹ The numbers are those of the candidate list [`scan/bell_candidates.md`](https://github.com/thomasreus-bb/bb6-vampire-family-1RB0LA_0RC0RB_1LD1LA_1LC1RE_1RF0RD_1LC---/blob/main/scan/bell_candidates.md) in the repository [bb6-vampire-family](https://github.com/thomasreus-bb/bb6-vampire-family-1RB0LA_0RC0RB_1LD1LA_1LC1RE_1RF0RD_1LC---); the chapters below are still empty.
 
 ## Machines
 
