@@ -97,7 +97,7 @@ with a small constant c. The list S = [m, g1, b1, g2, b2, ...] is a **stack**: e
 
 **Way to HALT.** HALT needs a block of length 1 in the stack that is then hit (about 6 % chance). Blocks of length 1 only arise when an odd block shrinks step by step: 9 → 7 → 5 → 3 → 1. Blocks 9 are frequent, every further step is rare. The smallest block seen so far plays the role of the distance D of the vampires.
 
-**Data** (simulation with `sim70dc`, exact, 2,334,311,323 Bells, about 10^(8.2·10⁸) TM steps, no HALT):
+**Data** (simulation with [`sim70dc`](m70/README.md), exact, 2,334,311,323 Bells, about 10^(8.2·10⁸) TM steps, no HALT):
 
 | quantity | value |
 |---|---|
@@ -105,7 +105,7 @@ with a small constant c. The list S = [m, g1, b1, g2, b2, ...] is a **stack**: e
 | blocks 7 | 10,370 (4.4·10⁻⁶ per Bell) |
 | blocks 5 | 26 (1.1·10⁻⁸ per Bell), first at Bell 48,097,200 |
 | blocks 3 / 1 | 0 / 0 |
-| P(5 → 3), P(3 → 1) | 0.8 %, 0.6 % (injection tests: block put into the real stack, 300 Bells with random parities) |
+| P(5 → 3), P(3 → 1) | 0.8 %, 0.6 % (injection tests with [`watch70.py`](m70/README.md): block put into the real stack, 300 Bells with random parities) |
 | P(HALT \| block 1) | 6 % |
 | first block 3 expected after | about 10¹⁰ Bells |
 
