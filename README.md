@@ -18,7 +18,7 @@ Machines whose Bell map is driven by the digits of one large number n (n' ≈ q�
 | <a id="t5"></a>[5](#5) | `1RB0LA_0RC0RB`<br>`1LD1LA_1LC1RE`<br>`1RF0RD_1LA---`<br>(TM2a, O3) | as no. 1 | **simulated to HALT** (Bell 1,961,935,897,288, Ahmer Raza, 30 Oct) | as no. 1 | 79 h on 8 cores (65 h of new progress) | ≈ 10^(6.91·10¹¹) |
 | <a id="t6"></a>[6](#6) | `1RB---_0RC0RB`<br>`1LD1LE_1LC1RF`<br>`1RB0LE_1RA0RD`<br>(TM2b, O4) | as no. 1 | **simulated to HALT** (Bell 1,941,376,761,248, Ahmer Raza, 1 Nov) | as no. 1 | several days on 8 cores | ≈ 10^(6.84·10¹¹) |
 | <a id="t7"></a>[7](#7) | `1RB0RF_1LC---`<br>`1LF1LD_1RE0LD`<br>`0RC0RE_1LC1RA`<br>(TM2b', O4) | as no. 1 | **simulated to HALT** (orbit O4, as no. 6) | as no. 1 | as no. 6 | ≈ 10^(6.84·10¹¹) |
-| <a id="t70"></a>[70](#70) | `1RB1RF_1LC1RD`<br>`1LA1LC_1RA0RE`<br>`1RD1LA_---0LE` | vampire-like, 3/2 (x' = 3x/2 + c), the parity of x/6 drives a rewriting system on a growing stack (table **not** closed, rules learned on the fly); HALT needs an odd stack block to shrink 9 → 7 → 5 → 3 → 1 | **open** (2,334,311,323 Bells, about 10^(8.2·10⁸) steps, no HALT; closest approach: block 5 near the front, 26 times; block 7 10,370 times) | 3·10⁻¹⁴ per Bell (90 %: 2.7–4.5·10⁻¹⁴) → median ≈ 2·10¹³ Bells | out of reach for a notebook: `sim70dz` runs at 1–3 million Bells/s on one core and needs no deep stack (`-d`), but at the median x alone has about 1.5 TB and the run would take some 230 days; a first block 3 (about 10¹⁰ Bells) is within reach | ≈ 10^(7·10¹²) |
+| <a id="t70"></a>[70](#70) | `1RB1RF_1LC1RD`<br>`1LA1LC_1RA0RE`<br>`1RD1LA_---0LE` | vampire-like, 3/2 (x' = 3x/2 + c), the parity of x/6 drives a rewriting system on a growing stack (table **not** closed, rules learned on the fly); HALT needs an odd stack block to shrink 9 → 7 → 5 → 3 → 1 | **open** (50,132,149,704 Bells, about 10^(1.77·10¹⁰) steps, no HALT; closest approach: block 5 near the front, 460 times; block 7 221,440 times) | about 10⁻¹⁹ to 10⁻²⁰ per Bell (new blocks sit behind large gaps) → median about 10¹⁹ Bells or more; HALT with probability 1 in the model | out of reach (x alone would need about 7·10¹⁷ bytes) | ≈ 10^(3.5·10¹⁸) |
 | <a id="t86"></a>[86](#86) | `1RB0RE_1RC0RF`<br>`1LD1RA_1LB1LD`<br>`1RA1LB_---0LD` | in lockstep with no. 70 (same left part, only a frozen right end differs); no. 70 is exactly no. 86 started in B | **open** (as no. 70, as long as the lockstep holds) | as no. 70 | as no. 70 | as no. 70 |
 | <a id="t105"></a>[105](#105) | `1RB1LF_1LC0RD`<br>`---1LA_0LA0RE`<br>`1LA1RA_1LB0LD` | vampire-like, 4/3, small tail counter; 35-level residue path to HALT | **open** (100,000 levels without HALT) | 1.1·10⁻¹⁴ per level → ≈ 9·10¹³ levels (median 6·10¹³) | ≈ 5,000× the TM2 run: about 200 years on a notebook, a few years on a large cluster (simulator still to be written) | ≈ 10^(2.25·10¹³) |
 | <a id="t51"></a>[51](#51) | `1RB0RE_1LC0RA`<br>`1LA1LD_1LC1LF`<br>`0LC0LB_1LE---` | 8/3 map, memory word r as a stack (table **not** closed); 108-step path to HALT from r = empty | **open** (probviously halting cryptid; 400 macro steps, about 10^320 TM steps, no HALT; closest approach 102 macro steps) | about 3^−80 per reset of r (wiki, Racheline) | out of reach | ≈ 10^10^38 (wiki, heuristic) |
@@ -98,28 +98,34 @@ with a small constant c. The list S = [m, g1, b1, g2, b2, ...] is a **stack**: e
 
 **Way to HALT.** HALT needs a block of length 1 in the stack that is then hit (about 6 % chance). Blocks of length 1 only arise when an odd block shrinks step by step: 9 → 7 → 5 → 3 → 1. Blocks 9 are frequent, every further step is rare. During the simulation, the smallest block seen so far indicates how close the run has come to HALT (simulation progress), similar to the role of the distance D for the vampires (nos. 1–8).
 
-**Data** (simulation with [`sim70dc`](m70/README.md), exact, 2,334,311,323 Bells, about 10^(8.2·10⁸) TM steps, no HALT):
+**Data** (simulation with [`sim70dc`](m70/README.md) on a notebook, Thomas Reus, 23–24 Nov 2026; exact, 50,132,149,704 Bells, about 10^(1.77·10¹⁰) TM steps, x has 2.9·10¹⁰ bits, no HALT):
 
 | quantity | value |
 |---|---|
-| blocks 9 near the front | 462,215 (2.0·10⁻⁴ per Bell) |
-| blocks 7 | 10,370 (4.4·10⁻⁶ per Bell) |
-| blocks 5 | 26 (1.1·10⁻⁸ per Bell), first at Bell 48,097,200 |
+| blocks 9 near the front | 9,928,622 (2.0·10⁻⁴ per Bell) |
+| blocks 7 | 221,440 (4.4·10⁻⁶ per Bell) |
+| blocks 5 | 460 (0.9·10⁻⁸ per Bell; about a quarter of them are the same block coming back into the first three positions) |
 | blocks 3 / 1 | 0 / 0 |
-| P(5 → 3), P(3 → 1) | 0.8 %, 0.6 % (injection tests with [`watch70.py`](m70/README.md): block put into the real stack, 300 Bells with random parities) |
-| P(HALT \| block 1) | 6 % |
-| first block 3 expected after | about 10¹⁰ Bells |
+| counts per 8·10⁸ Bells | constant over the whole run (stationary) |
 
-**Expected HALT (Markov-type estimate).** Rate = (blocks 5 per Bell) · P(5 → 3) · P(3 → 1) · P(HALT | 1) ≈ 1.1·10⁻⁸ · 0.008 · 0.006 · 0.06 ≈ **3·10⁻¹⁴ per Bell** (90 % interval 2.7–4.5·10⁻¹⁴ from the long-run estimator). The rate stays constant over the run, so in this model the machine halts with probability 1:
+**Why the last steps are so rare.** A new small odd block always appears directly behind a large gap: the front of the stack is then `4 |G| v 3 4 6 …`. At a shrink step the block has gap 4 in front and the new gap is G = m + 4, where m is the front block, which grows while nothing is pushed. A block that survives long near the front therefore shrinks only when m is large. New 7s sit behind G ≈ 67, new 5s behind G = 91–147; a typical gap in the stack is about 6. Whether a block shrinks further depends almost only on this gap, in the same way for every step (7 → 5, 5 → 3, 3 → 1, and HALT for a block 1). The values are measured on real fronts with the gap set to the test value, 300 Bells with random parities ([`fate70.py`, `gap70.py`, `gapv70.py`](m70/README.md)):
 
-| | Bells | TM steps |
-|---|---|---|
-| 50 % (median) | ≈ 2·10¹³ | ≈ 10^(7·10¹²) |
-| 99 % | ≈ 1.3·10¹⁴ | ≈ 10^(5·10¹³) |
+| gap in front of the block | 1 | 4–10 | 20 | 40 | 67 | 91 | 115 | ≥ 130 |
+|---|---|---|---|---|---|---|---|---|
+| P(next step) | ≈ 50 % | 0 | 3.3 % | 1.3 % | 0.3 % | 0.035 % | 0.005 % | 0 of 20,000 |
 
-This is a heuristic, not a proof; the probabilities of the last steps rest on few events and are good to about a factor 3.
+Continuing the real fronts gives P(7 → 5) = 0.15 % (the run itself gives 0.2 %) and P(5 → 3) = 0 of 6,800 (below about 0.05 %). The earlier injection tests had put the block behind a typical small gap and gave 0.7 % and 0.8–1 %, far too high. So no block 3 after 460 blocks 5 is just what is expected.
 
-**Computing time to HALT.** `sim70dz` runs at 1–3 million Bells/s on one core (slowly falling). The deep part of the stack is never read back (checked to 3·10⁸ Bells with only 4,096 entries in RAM), so it need not be stored (`-d`). What remains is x: 0.073 bytes per Bell, about 1.5 TB at the median of 2·10¹³ Bells, and the time: at about 10⁶ Bells/s some 230 days on one core. Out of reach for a notebook (x would have to live on disk, as in `belldco`); a first block 3 (about 10¹⁰ Bells, x about 0.7 GB) is within reach.
+**Expected HALT (Markov-type estimate).** Rate ≈ 2·10⁻⁴ (new 9) · 2.2 % (9 → 7) · 0.2 % (7 → 5) · about 2·10⁻⁴ (5 → 3) · ≤ 10⁻⁴ (3 → 1) · ≤ 10⁻⁴ (1 → HALT) ≈ **10⁻¹⁹ to 10⁻²⁰ per Bell**, median about **10¹⁹ Bells or more** (about 10^(3.5·10¹⁸) TM steps). The earlier value (3·10⁻¹⁴ per Bell, median 2·10¹³ Bells) used the injection values and was too optimistic.
+
+**No way out except HALT.** Nothing in the run points to a way to avoid the HALT for ever:
+- the deep part of the stack is never read again, so the machine is a front of a few stack entries driven by one parity bit per Bell, and the parities behave like random bits;
+- the rates of new blocks 9, 7 and 5 stay constant over 5·10¹⁰ Bells; there is no drift, no cycle and no invariant that would forbid small blocks;
+- every link of the chain 9 → 7 → 5 → 3 → 1 → HALT has a small but positive probability, also behind large gaps (the gap curve falls fast, but not to zero).
+
+In this model the machine halts with probability 1; it only takes far longer than first estimated. This is a heuristic, not a proof.
+
+**Computing time to HALT.** `sim70dc` ran at 0.7–1.4 million Bells/s on the notebook (slowly falling, because x grows by 0.585 bits per Bell). At the new median of about 10¹⁹ Bells, x alone would have about 7·10¹⁷ bytes: out of reach for any computer. The deep stack need not be stored (`sim70dz -d`).
 
 <a id="86"></a>
 ### [86](#t86). `1RB0RE_1RC0RF_1LD1RA_1LB1LD_1RA1LB_---0LD`

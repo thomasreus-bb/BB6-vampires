@@ -7,6 +7,9 @@
 | `sim70.c` | the same without GMP and without disk (simpler, much slower for large x) |
 | `macro70.py`, `lev70.c` | the rule learner in Python (used by `watch70.py`; `lev70` is compiled automatically) |
 | `watch70.py` | long-run estimator: real run plus injection tests (a block 1, 3, 5, 7 or 9 put into the real stack, 300 Bells with random parities), gives the halting rate per Bell with an interval and a stationarity test |
+| `sim70ev.c` | as `sim70dz.c`, plus `dump70.txt`: the front of the stack before and after every Bell in which a block 7 or 5 appears among the first three stack blocks (`./sim70ev -d -t 1500000000`) |
+| `fate70.py` | continues the real fronts of `dump70.txt` with random parities (`python3 fate70.py dump70.txt 5 400 300`): P(smaller odd block) from real contexts, compared with an injection control |
+| `gap70.py`, `gapv70.py` | the same with the gap in front of the block set to test values; `gapv70.py` replaces the block by 3 or 1 (for 1 it counts HALT) |
 
 ## sim70dc
 
